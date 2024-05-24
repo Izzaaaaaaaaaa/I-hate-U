@@ -94,15 +94,15 @@ def pemesanan():
             print(f"Alamat Email: {penumpang['email']}")
 
 
-        konfirmasi_pemesanan = input("Konfirmasi Pemesanan ? (ya/tidak)").lower()
+        konfirmasi_pemesanan = input("Konfirmasi Pemesanan ? (ya/tidak): ").lower()
         if konfirmasi_pemesanan == "ya":
-            print("Pemesanan anda terlah di konfirmasi. Terimakasih atas pembelian Anda!!")
+            print("Pemesanan anda telah di konfirmasi. Terimakasih atas pembelian Anda!!")
         elif konfirmasi_pemesanan == "tidak":
             print("Pemesanan Tiket Dibatalkan.")
         else:
             print("Maaf, Pilihan anda tidak valid")
     except ValueError:
-        print("Input tidak vallid silahkan coba lagi.")
+        print("Input tidak valid silahkan coba lagi.")
 
 if __name__ == "__main__":
     pemesanan()
