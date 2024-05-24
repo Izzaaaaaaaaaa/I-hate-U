@@ -35,4 +35,22 @@ def jadwal_keberangkatan(route_id):
         print(f"{i}. {schedule}")
     return jadwal[route_id]
 
-
+def data_penumpang(jumlah_tiket):
+    data = []
+    for i in range(jumlah_tiket):
+        print(f"\nMasukkan data penumpang ke-{i+1}:")
+        nama = str(input("Nama Penumpang: "))
+        nik = int(input("NIK: "))
+        telepon = int(input("Nomor Telepon: "))
+        email = input("Alamat Email: ")
+        if "@" not in email :
+            raise ValueError("Email harus menggunakan '@'.")
+        else:
+            print("Email tidak valid!")
+        data.append({
+            "nama": nama,
+            "nik": nik,
+            "telepon": telepon,
+            "email": email
+        })
+    return data
