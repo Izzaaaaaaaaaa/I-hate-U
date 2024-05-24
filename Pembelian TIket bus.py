@@ -23,7 +23,7 @@ def rute_keberangkatan():
     print("Rute yang Tersedia: ")
     for key, value in routes.items():
         print(f"{key}. {value['route']} (IDR {value['price']})")
-        return routes
+    return routes
     
 def jadwal_keberangkatan(route_id):
     jadwal = {
