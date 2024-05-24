@@ -54,3 +54,31 @@ def data_penumpang(jumlah_tiket):
             "email": email
         })
     return data
+
+def pemesanan():
+    routes = rute_keberangkatan()
+    try:
+        route_id = int(input("Pilih rute berdasarkan nomor: "))
+        if route_id not in routes:
+            print("Pilihan rute tidak valid.")
+            return
+        
+        waktu_keberangkatan = jadwal_keberangkatan(route_id)
+        pilih_waktu_keberangkatan = int(input("Pilih jadwal berdasarkan nomor: "))
+        if pilih_waktu_keberangkatan not in range(1, len(waktu_keberangkatan)+ 1):
+            print("Pilihan jadwal tidak valid.")
+            return
+        
+        jumlah_tiket = int(input("Masukkan jumlah tiket: "))
+        if jumlah_tiket <= 0:
+            print("Jumlah tiket tidak valid.")
+            return
+        
+        
+        total = routes[route_id]["price"] * jumlah_tiket
+        penumpang = data_penumpang(jumlah_tiket)
+
+
+
+
+    
