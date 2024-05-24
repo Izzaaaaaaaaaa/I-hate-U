@@ -89,7 +89,7 @@ def pemesanan():
         for i, penumpang in enumerate(penumpang, start=1):
             print(f"\n Data Penumpang {i}: ")
             print(f"Nama: {penumpang['name']}")
-            print(f"NIK: {penumpang["nik"]}")
+            print(f"NIK: {penumpang['nik']}")
             print(f"Nomor Telepon: {penumpang['phone']}")
             print(f"Alamat Email: {penumpang['email']}")
 
