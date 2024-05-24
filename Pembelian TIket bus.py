@@ -5,16 +5,20 @@ print()
 print("                <<========== Terminal INTR ===========>>     ")
 print()
 print("                  <<========== Kota Tujuan ===========>>     ")
-print("              ===============================================")
 
+def cetak():
+    
+    print("              ===============================================")
+
+cetak()
 def rute_keberangkatan():
     routes = {
-        1: {"route": "Jakarta - Bandung", "price": 100.000},
-        2: {"route": "Jakarta - Surabaya", "price": 200.000},
-        3: {"route": "Jakarta - Yogyakarta", "price": 130.000},
-        4: {"route": "Jakarta - Lampung", "price": 250.000},
-        5: {"route": "Jakarta - Padang", "price": 500.000},
-        6: {"route": "Jakarta - Bandung", "price": 150.000},
+        1: {"route": "Jakarta - Bandung", "price": 100000},
+        2: {"route": "Jakarta - Surabaya", "price": 200000},
+        3: {"route": "Jakarta - Yogyakarta", "price": 130000},
+        4: {"route": "Jakarta - Lampung", "price": 250000},
+        5: {"route": "Jakarta - Padang", "price": 500000},
+        6: {"route": "Jakarta - Bandung", "price": 150000},
     }
     print("Rute yang Tersedia: ")
     for key, value in routes.items():
@@ -74,9 +78,35 @@ def pemesanan():
             print("Jumlah tiket tidak valid.")
             return
         
-        
         total = routes[route_id]["price"] * jumlah_tiket
         penumpang = data_penumpang(jumlah_tiket)
+
+        print("\n Ringkasan pemesanan: ")
+        print(f"Rute: {routes[route_id]['route']}")
+        print(f"Jadwal: {waktu_keberangkatan[pilih_waktu_keberangkatan -1]}")
+        print(f"Jumlah Tiket: {jumlah_tiket}")
+        print(f"Total Harga: IDR {total}")
+        for i, penumpang in enumerate(penumpang, start=1):
+            print(f"\n Data Penumpang {i}: ")
+            print(f"Nama: {penumpang['name']}")
+            print(f"NIK: {penumpang["nik"]}")
+            print(f"Nomor Telepon: {penumpang['phone']}")
+            print(f"Alamat Email: {penumpang['email']}")
+
+
+        konfirmasi_pemesanan = input("Konfirmasi Pemesanan ? (ya/tidak)").lower()
+        if konfirmasi_pemesanan == "ya":
+            print("Pemesanan anda terlah di konfirmasi. Terimakasih atas pembelian Anda!!")
+        elif konfirmasi_pemesanan == "tidak":
+            print("Pemesanan Tiket Dibatalkan.")
+        else:
+            print("Maaf, Pilihan anda tidak valid")
+    except ValueError:
+        print("Input tidak vallid silahkan coba lagi.")
+
+if __name__ == "__main__":
+    pemesanan()
+
 
 
 
