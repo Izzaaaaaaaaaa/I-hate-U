@@ -1,3 +1,4 @@
+# Naura Aisha Zahira (2311104078)
 def home():
     pass
 print("              <<========== Pembelian Tiket BUS ===========>>")
@@ -38,7 +39,7 @@ def jadwal_keberangkatan(route_id):
     for i, schedule in enumerate(jadwal[route_id], start=1):
         print(f"{i}. {schedule}")
     return jadwal[route_id]
-
+# Rengganis Tantri Pramudita(2311104065)
 def data_penumpang(jumlah_tiket):
     data = []
     for i in range(jumlah_tiket):
@@ -58,7 +59,7 @@ def data_penumpang(jumlah_tiket):
             "email": email
         })
     return data
-
+# Tiurma Grace Angelina (2311104042)
 def pemesanan():
     routes = rute_keberangkatan()
     try:
@@ -80,7 +81,7 @@ def pemesanan():
         
         total = routes[route_id]["price"] * jumlah_tiket
         penumpang = data_penumpang(jumlah_tiket)
-
+# Izzaty zahara Br barus (2311104052)
         print("\n Ringkasan pemesanan: ")
         print(f"Rute: {routes[route_id]['route']}")
         print(f"Jadwal: {waktu_keberangkatan[pilih_waktu_keberangkatan -1]}")
