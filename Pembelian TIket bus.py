@@ -60,53 +60,52 @@ def data_penumpang(jumlah_tiket):
         })
     return data
 # Tiurma Grace Angelina (2311104042)
-def pemesanan():
-    routes = rute_keberangkatan()
-    try:
-        route_id = int(input("Pilih rute berdasarkan nomor: "))
-        if route_id not in routes:
-            print("Pilihan rute tidak valid.")
-            return
-        
-        waktu_keberangkatan = jadwal_keberangkatan(route_id)
-        pilih_waktu_keberangkatan = int(input("Pilih jadwal berdasarkan nomor: "))
-        if pilih_waktu_keberangkatan not in range(1, len(waktu_keberangkatan)+ 1):
-            print("Pilihan jadwal tidak valid.")
-            return
-        
-        jumlah_tiket = int(input("Masukkan jumlah tiket: "))
-        if jumlah_tiket <= 0:
-            print("Jumlah tiket tidak valid.")
-            return
-        
-        total = routes[route_id]["price"] * jumlah_tiket
-        penumpang = data_penumpang(jumlah_tiket)
-# Izzaty zahara Br barus (2311104052)
-        print("\n Ringkasan pemesanan: ")
-        print(f"Rute: {routes[route_id]['route']}")
-        print(f"Jadwal: {waktu_keberangkatan[pilih_waktu_keberangkatan -1]}")
-        print(f"Jumlah Tiket: {jumlah_tiket}")
-        print(f"Total Harga: IDR {total}")
-        for i, penumpang in enumerate(penumpang, start=1):
-            print(f"\n Data Penumpang {i}: ")
-            print(f"Nama: {penumpang['nama']}")
-            print(f"NIK: {penumpang['nik']}")
-            print(f"Nomor Telepon: {penumpang['telepon']}")
-            print(f"Alamat Email: {penumpang['email']}")
+while True:
+        routes = rute_keberangkatan()
+        try:
+            route_id = int(input("Pilih rute berdasarkan nomor: "))
+            if route_id not in routes:
+                print("Pilihan rute tidak valid.")
+                continue
+
+            waktu_keberangkatan = jadwal_keberangkatan(route_id)
+            pilih_waktu_keberangkatan = int(input("Pilih jadwal berdasarkan nomor: "))
+            if pilih_waktu_keberangkatan not in range(1, len(waktu_keberangkatan) + 1):
+                print("Pilihan jadwal tidak valid.")
+                continue
+
+            jumlah_tiket = int(input("Masukkan jumlah tiket: "))
+            if jumlah_tiket <= 0:
+                print("Jumlah tiket tidak valid.")
+                continue
+
+            total = routes[route_id]["price"] * jumlah_tiket
+            penumpang = data_penumpang(jumlah_tiket)
+# Izzaty zahara BR Barus (2311104052)
+            print("\nRingkasan Pemesanan:")
+            print(f"Rute: {routes[route_id]['route']}")
+            print(f"Jadwal: {waktu_keberangkatan[pilih_waktu_keberangkatan - 1]}")
+            print(f"Jumlah Tiket: {jumlah_tiket}")
+            print(f"Total Harga: IDR {total}")
+            for i, penumpang in enumerate(penumpang, start=1):
+                print(f"\nData Penumpang {i}: ")
+                print(f"Nama: {penumpang['name']}")
+                print(f"NIK: {penumpang['nik']}")
+                print(f"Nomor Telepon: {penumpang['phone']}")
+                print(f"Alamat Email: {penumpang['email']}")
+
+            konfirmasi_pemesanan = input("Konfirmasi pemesanan? (Y/N): ").lower()
+            if konfirmasi_pemesanan == "ya":
+                print("Pemesanan dikonfirmasi. Terima kasih atas pembelian Anda!")
+                break
+            elif konfirmasi_pemesanan == "tidak":
+                print("Pemesanan dibatalkan.")
+            else:
+                print("Pilihan tidak valid.")
+        except ValueError:
+            print("Input tidak valid, silakan coba lagi.")
 
 
-        konfirmasi_pemesanan = input("Konfirmasi Pemesanan ? (ya/tidak): ").lower()
-        if konfirmasi_pemesanan == "ya":
-            print("Pemesanan anda telah di konfirmasi. Terimakasih atas pembelian Anda!!")
-        elif konfirmasi_pemesanan == "tidak":
-            print("Pemesanan Tiket Dibatalkan.")
-        else:
-            print("Maaf, Pilihan anda tidak valid")
-    except ValueError:
-        print("Input tidak valid silahkan coba lagi.")
-
-if __name__ == "__main__":
-    pemesanan()
 
 
 
