@@ -1,15 +1,15 @@
 # Naura Aisha Zahira (2311104078)
 def home():
     pass
-print("              <<========== Pembelian Tiket BUS ===========>>")
+print("<<========== Pembelian Tiket BUS ===========>>")
 print()
-print("                <<========== Terminal INTR ===========>>     ")
+print("<<========== Terminal INTR ===========>>     ")
 print()
-print("                  <<========== Kota Tujuan ===========>>     ")
+print("<<========== Kota Tujuan ===========>>     ")
 
 def cetak():
     
-    print("              ===============================================")
+    print("===============================================")
 
 cetak()
 def rute_keberangkatan():
@@ -70,6 +70,7 @@ while True:
 
             waktu_keberangkatan = jadwal_keberangkatan(route_id)
             pilih_waktu_keberangkatan = int(input("Pilih jadwal berdasarkan nomor: "))
+
             if pilih_waktu_keberangkatan not in range(1, len(waktu_keberangkatan) + 1):
                 print("Pilihan jadwal tidak valid.")
                 continue
@@ -87,6 +88,7 @@ while True:
             print(f"Jadwal: {waktu_keberangkatan[pilih_waktu_keberangkatan - 1]}")
             print(f"Jumlah Tiket: {jumlah_tiket}")
             print(f"Total Harga: IDR {total}")
+
             for i, penumpang in enumerate(penumpang, start=1):
                 print(f"\nData Penumpang {i}: ")
                 print(f"Nama: {penumpang['name']}")
