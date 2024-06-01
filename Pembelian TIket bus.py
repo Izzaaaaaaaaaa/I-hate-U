@@ -91,12 +91,12 @@ while True:
 
             for i, penumpang in enumerate(penumpang, start=1):
                 print(f"\nData Penumpang {i}: ")
-                print(f"Nama: {penumpang['name']}")
+                print(f"Nama: {penumpang['nama']}")
                 print(f"NIK: {penumpang['nik']}")
-                print(f"Nomor Telepon: {penumpang['phone']}")
+                print(f"Nomor Telepon: {penumpang['telepon']}")
                 print(f"Alamat Email: {penumpang['email']}")
 
-            konfirmasi_pemesanan = input("Konfirmasi pemesanan? (Y/N): ").lower()
+            konfirmasi_pemesanan = input("Konfirmasi pemesanan? (Ya/Tidak): ").lower()
             if konfirmasi_pemesanan == "ya":
                 print("Pemesanan dikonfirmasi. Terima kasih atas pembelian Anda!")
                 break
