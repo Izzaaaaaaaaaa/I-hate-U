@@ -99,14 +99,21 @@ while True:
             konfirmasi_pemesanan = input("Konfirmasi pemesanan? (Ya/Tidak): ").lower()
             if konfirmasi_pemesanan == "ya":
                 print("Pemesanan dikonfirmasi. Terima kasih atas pembelian Anda!")
-                break
-            elif konfirmasi_pemesanan == "tidak":
-                print("Pemesanan dibatalkan.")
             else:
-                print("Pilihan tidak valid.")
+                print("Pemesanan dibatalkan.")
+
+            lanjut_pemesanan = input("Apakah Anda ingin melakukan pemesanan lagi? (Ya/Tidak): ").lower()
+            while lanjut_pemesanan not in ["ya", "tidak"]:    
+                lanjut_pemesanan = input("Mohon masukkan jawaban yang valid: (Ya/Tidak): ").lower()
+            if lanjut_pemesanan == "tidak":
+                print("Terima kasih telah menggunakan sistem kami.")
+                exit()
+            else:
+            # Kembali ke awal program untuk melakukan pemesanan lagi
+                print("Silakan melakukan pemesanan lagi.")
+
         except ValueError:
             print("Input tidak valid, silakan coba lagi.")
-
 
 
 
