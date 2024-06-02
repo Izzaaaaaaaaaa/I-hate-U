@@ -3,15 +3,14 @@ def home():
     pass
 print("<<========== Pembelian Tiket BUS ===========>>")
 print()
-print("<<========== Terminal INTR ===========>>     ")
+print("<<========== Terminal INTR ===========>>")
 print()
-print("<<========== Kota Tujuan ===========>>     ")
+print("<<========== Kota Tujuan ===========>>")
 
 def cetak():
-    
     print("===============================================")
+    cetak()
 
-cetak()
 def rute_keberangkatan():
     routes = {
         1: {"route": "Jakarta - Bandung", "price": 100000},
@@ -39,6 +38,7 @@ def jadwal_keberangkatan(route_id):
     for i, schedule in enumerate(jadwal[route_id], start=1):
         print(f"{i}. {schedule}")
     return jadwal[route_id]
+
 # Rengganis Tantri Pramudita(2311104065)
 def data_penumpang(jumlah_tiket):
     data = []
@@ -59,6 +59,7 @@ def data_penumpang(jumlah_tiket):
             "email": email
         })
     return data
+
 # Tiurma Grace Angelina (2311104042)
 while True:
         routes = rute_keberangkatan()
@@ -82,6 +83,7 @@ while True:
 
             total = routes[route_id]["price"] * jumlah_tiket
             penumpang = data_penumpang(jumlah_tiket)
+
 # Izzaty zahara BR Barus (2311104052)
             print("\nRingkasan Pemesanan:")
             print(f"Rute: {routes[route_id]['route']}")
@@ -109,15 +111,6 @@ while True:
                 print("Terima kasih telah menggunakan sistem kami.")
                 exit()
             else:
-            # Kembali ke awal program untuk melakukan pemesanan lagi
                 print("Silakan melakukan pemesanan lagi.")
-
         except ValueError:
             print("Input tidak valid, silakan coba lagi.")
-
-
-
-
-
-
-    
