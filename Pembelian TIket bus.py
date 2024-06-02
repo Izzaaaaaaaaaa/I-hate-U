@@ -107,7 +107,7 @@ while True:
                 lanjut_pemesanan = input("Mohon masukkan jawaban yang valid: (Ya/Tidak): ").lower()
             if lanjut_pemesanan == "tidak":
                 print("Terima kasih telah menggunakan sistem kami.")
-                exit 
+                exit()
             else:
             # Kembali ke awal program untuk melakukan pemesanan lagi
                 print("Silakan melakukan pemesanan lagi.")
