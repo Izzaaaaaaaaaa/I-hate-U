@@ -38,7 +38,29 @@ def jadwal_keberangkatan(route_id):
     for i, schedule in enumerate(jadwal[route_id], start=1):
         print(f"{i}. {schedule}")
     return jadwal[route_id]
+#izzaty dan Tiur
+tempat_duduk = [0] * 40
 
+def tampilkan_tempat_duduk():
+    print("Tempat Duduk Bus:")
+    for i in range(len(tempat_duduk)):
+        status = 'Tersedia' if tempat_duduk[i] == 0 else 'Dipesan'
+        print(f'Tempat Duduk {i + 1}: {status}')
+    return tempat_duduk
+
+def pesan_tempat_duduk(nomor_tempat_duduk):
+    if tempat_duduk[nomor_tempat_duduk - 1] == 0:
+        tempat_duduk[nomor_tempat_duduk - 1] = 1
+        print(f'Tempat duduk {nomor_tempat_duduk} berhasil dipesan.')
+    else:
+        print(f'Tempat duduk {nomor_tempat_duduk} sudah dipesan oleh orang lain.')
+
+def batalkan_reservasi(nomor_tempat_duduk):
+    if tempat_duduk[nomor_tempat_duduk - 1] == 1:
+        tempat_duduk[nomor_tempat_duduk - 1] = 0
+        print(f'Reservasi tempat duduk {nomor_tempat_duduk} berhasil dibatalkan.')
+    else:
+        print(f'Tempat duduk {nomor_tempat_duduk} belum dipesan.')
 # Rengganis Tantri Pramudita(2311104065)
 def data_penumpang(jumlah_tiket):
     data = []
@@ -59,7 +81,36 @@ def data_penumpang(jumlah_tiket):
             "email": email
         })
     return data
+#izzaty dan Tiur
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Tampilkan Tempat Duduk")
+        print("2. Pesan Tempat Duduk")
+        print("3. Batalkan Reservasi")
+        print("4. Keluar")
 
+        pilihan = int(input("Pilih opsi: "))
+
+        if pilihan == 1:
+            tampilkan_tempat_duduk()
+        elif pilihan == 2:
+            nomor_tempat_duduk = int(input("Masukkan nomor tempat duduk yang ingin dipesan: "))
+            if 1 <= nomor_tempat_duduk <= len(tempat_duduk):
+                pesan_tempat_duduk(nomor_tempat_duduk)
+            else:
+                print("Nomor tempat duduk tidak valid.")
+        elif pilihan == 3:
+            nomor_tempat_duduk = int(input("Masukkan nomor tempat duduk yang ingin dibatalkan: "))
+            if 1 <= nomor_tempat_duduk <= len(tempat_duduk):
+                batalkan_reservasi(nomor_tempat_duduk)
+            else:
+                print("Nomor tempat duduk tidak valid.")
+        elif pilihan == 4:
+            print("Terima kasih telah menggunakan layanan kami.")
+            exit()
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
 # Tiurma Grace Angelina (2311104042)
 while True:
         routes = rute_keberangkatan()
@@ -83,7 +134,19 @@ while True:
 
             total = routes[route_id]["price"] * jumlah_tiket
             penumpang = data_penumpang(jumlah_tiket)
-
+ #izzaty dan tiur
+            tampilkan_tempat_duduk()
+            for _ in range(jumlah_tiket):
+                while True:
+                    nomor_tempat_duduk = int(input("Masukkan nomor tempat duduk yang ingin dipesan: "))
+                    if 1 <= nomor_tempat_duduk <= len(tempat_duduk):
+                        if tempat_duduk[nomor_tempat_duduk - 1] == 0:
+                            pesan_tempat_duduk(nomor_tempat_duduk)
+                            break
+                        else:
+                            print("Tempat duduk sudah dipesan, silakan pilih yang lain.")
+                    else:
+                        print("Nomor tempat duduk tidak valid, silakan coba lagi.")               
 # Izzaty zahara BR Barus (2311104052)
             print("\nRingkasan Pemesanan:")
             print(f"Rute: {routes[route_id]['route']}")
@@ -114,3 +177,5 @@ while True:
                 print("Silakan melakukan pemesanan lagi.")
         except ValueError:
             print("Input tidak valid, silakan coba lagi.")
+
+        
