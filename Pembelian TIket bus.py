@@ -24,7 +24,6 @@ def rute_keberangkatan():
     for key, value in routes.items():
         print(f"{key}. {value['route']} (IDR {value['price']})")
     return routes
-    
 def jadwal_keberangkatan(route_id):
     jadwal = {
         1: ["08:00", "12:00", "16:00"],
@@ -39,25 +38,33 @@ def jadwal_keberangkatan(route_id):
         print(f"{i}. {schedule}")
     return jadwal[route_id]
 #izzaty dan Tiur
-tempat_duduk = [0] * 40
-
-def tampilkan_tempat_duduk():
+tempat_duduk = {}
+def inisialisasi_tempat_duduk(route_id, jadwal_id):
+    global tempat_duduk
+    key = (route_id, jadwal_id)
+    if key not in tempat_duduk:
+        tempat_duduk[key] = [0] * 40
+def tampilkan_tempat_duduk(route_id, jadwal_id):
+    key = (route_id, jadwal_id)
+    inisialisasi_tempat_duduk(route_id, jadwal_id)
     print("Tempat Duduk Bus:")
-    for i in range(len(tempat_duduk)):
-        status = 'Tersedia' if tempat_duduk[i] == 0 else 'Dipesan'
+    for i in range(len(tempat_duduk[key])):
+        status = 'Tersedia' if tempat_duduk[key][i] == 0 else 'Dipesan'
         print(f'Tempat Duduk {i + 1}: {status}')
-    return tempat_duduk
-
-def pesan_tempat_duduk(nomor_tempat_duduk):
-    if tempat_duduk[nomor_tempat_duduk - 1] == 0:
-        tempat_duduk[nomor_tempat_duduk - 1] = 1
+    return tempat_duduk[key]
+def pesan_tempat_duduk(route_id, jadwal_id, nomor_tempat_duduk):
+    key = (route_id, jadwal_id)
+    inisialisasi_tempat_duduk(route_id, jadwal_id)
+    if tempat_duduk[key][nomor_tempat_duduk - 1] == 0:
+        tempat_duduk[key][nomor_tempat_duduk - 1] = 1
         print(f'Tempat duduk {nomor_tempat_duduk} berhasil dipesan.')
     else:
         print(f'Tempat duduk {nomor_tempat_duduk} sudah dipesan oleh orang lain.')
-
-def batalkan_reservasi(nomor_tempat_duduk):
-    if tempat_duduk[nomor_tempat_duduk - 1] == 1:
-        tempat_duduk[nomor_tempat_duduk - 1] = 0
+def batalkan_reservasi(route_id, jadwal_id, nomor_tempat_duduk):
+    key = (route_id, jadwal_id)
+    inisialisasi_tempat_duduk(route_id, jadwal_id)
+    if tempat_duduk[key][nomor_tempat_duduk - 1] == 1:
+        tempat_duduk[key][nomor_tempat_duduk - 1] = 0
         print(f'Reservasi tempat duduk {nomor_tempat_duduk} berhasil dibatalkan.')
     else:
         print(f'Tempat duduk {nomor_tempat_duduk} belum dipesan.')
@@ -89,21 +96,25 @@ def main():
         print("2. Pesan Tempat Duduk")
         print("3. Batalkan Reservasi")
         print("4. Keluar")
-
         pilihan = int(input("Pilih opsi: "))
-
         if pilihan == 1:
-            tampilkan_tempat_duduk()
+            route_id = int(input("Masukkan ID rute: "))
+            jadwal_id = int(input("Masukkan ID jadwal: "))
+            tampilkan_tempat_duduk(route_id, jadwal_id)
         elif pilihan == 2:
+            route_id = int(input("Masukkan ID rute: "))
+            jadwal_id = int(input("Masukkan ID jadwal: "))
             nomor_tempat_duduk = int(input("Masukkan nomor tempat duduk yang ingin dipesan: "))
-            if 1 <= nomor_tempat_duduk <= len(tempat_duduk):
-                pesan_tempat_duduk(nomor_tempat_duduk)
+            if 1 <= nomor_tempat_duduk <= 40:
+                pesan_tempat_duduk(route_id, jadwal_id, nomor_tempat_duduk)
             else:
                 print("Nomor tempat duduk tidak valid.")
         elif pilihan == 3:
+            route_id = int(input("Masukkan ID rute: "))
+            jadwal_id = int(input("Masukkan ID jadwal: "))
             nomor_tempat_duduk = int(input("Masukkan nomor tempat duduk yang ingin dibatalkan: "))
-            if 1 <= nomor_tempat_duduk <= len(tempat_duduk):
-                batalkan_reservasi(nomor_tempat_duduk)
+            if 1 <= nomor_tempat_duduk <= 40:
+                batalkan_reservasi(route_id, jadwal_id, nomor_tempat_duduk)
             else:
                 print("Nomor tempat duduk tidak valid.")
         elif pilihan == 4:
@@ -115,58 +126,60 @@ def main():
 while True:
         routes = rute_keberangkatan()
         try:
-            route_id = int(input("Pilih rute berdasarkan nomor: "))
+            route_input = input("Pilih rute berdasarkan nomor atau ketik 'exit' untuk keluar: ")
+            if route_input.lower() == 'exit':
+                print("Terima kasih telah menggunakan sistem kami.")
+                exit()
+            route_id = int(route_input)
             if route_id not in routes:
                 print("Pilihan rute tidak valid.")
                 continue
-
             waktu_keberangkatan = jadwal_keberangkatan(route_id)
             pilih_waktu_keberangkatan = int(input("Pilih jadwal berdasarkan nomor: "))
-
             if pilih_waktu_keberangkatan not in range(1, len(waktu_keberangkatan) + 1):
                 print("Pilihan jadwal tidak valid.")
                 continue
-
             jumlah_tiket = int(input("Masukkan jumlah tiket: "))
             if jumlah_tiket <= 0:
                 print("Jumlah tiket tidak valid.")
                 continue
-
             total = routes[route_id]["price"] * jumlah_tiket
             penumpang = data_penumpang(jumlah_tiket)
  #izzaty dan tiur
-            tampilkan_tempat_duduk()
+            jadwal_id = pilih_waktu_keberangkatan - 1
+            tampilkan_tempat_duduk(route_id, jadwal_id)
+            tempat_duduk_dipesan = []
             for _ in range(jumlah_tiket):
                 while True:
                     nomor_tempat_duduk = int(input("Masukkan nomor tempat duduk yang ingin dipesan: "))
-                    if 1 <= nomor_tempat_duduk <= len(tempat_duduk):
-                        if tempat_duduk[nomor_tempat_duduk - 1] == 0:
-                            pesan_tempat_duduk(nomor_tempat_duduk)
+                    if 1 <= nomor_tempat_duduk <= 40:
+                        if tempat_duduk[(route_id, jadwal_id)][nomor_tempat_duduk - 1] == 0:
+                            pesan_tempat_duduk(route_id, jadwal_id, nomor_tempat_duduk)
+                            tempat_duduk_dipesan.append(nomor_tempat_duduk)
                             break
                         else:
                             print("Tempat duduk sudah dipesan, silakan pilih yang lain.")
                     else:
-                        print("Nomor tempat duduk tidak valid, silakan coba lagi.")               
+                        print("Nomor tempat duduk tidak valid, silakan coba lagi.")
 # Izzaty zahara BR Barus (2311104052)
             print("\nRingkasan Pemesanan:")
             print(f"Rute: {routes[route_id]['route']}")
             print(f"Jadwal: {waktu_keberangkatan[pilih_waktu_keberangkatan - 1]}")
             print(f"Jumlah Tiket: {jumlah_tiket}")
             print(f"Total Harga: IDR {total}")
-
+            
             for i, penumpang in enumerate(penumpang, start=1):
                 print(f"\nData Penumpang {i}: ")
                 print(f"Nama: {penumpang['nama']}")
                 print(f"NIK: {penumpang['nik']}")
                 print(f"Nomor Telepon: {penumpang['telepon']}")
                 print(f"Alamat Email: {penumpang['email']}")
-
+                print(f"Tempat Duduk Penumpang: {tempat_duduk_dipesan[i - 1]}")
             konfirmasi_pemesanan = input("Konfirmasi pemesanan? (Ya/Tidak): ").lower()
             if konfirmasi_pemesanan == "ya":
                 print("Pemesanan dikonfirmasi. Terima kasih atas pembelian Anda!")
             else:
                 print("Pemesanan dibatalkan.")
-
             lanjut_pemesanan = input("Apakah Anda ingin melakukan pemesanan lagi? (Ya/Tidak): ").lower()
             while lanjut_pemesanan not in ["ya", "tidak"]:    
                 lanjut_pemesanan = input("Mohon masukkan jawaban yang valid: (Ya/Tidak): ").lower()
@@ -177,5 +190,3 @@ while True:
                 print("Silakan melakukan pemesanan lagi.")
         except ValueError:
             print("Input tidak valid, silakan coba lagi.")
-
-        
